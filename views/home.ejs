@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>STar Call</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .join-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        input {
+            display: block;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background: #2962ff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="join-container">
+        <h2>Join Video Call</h2>
+        <form id="join-form">
+            <input type="text" id="username" placeholder="Enter your name" required>
+            <input type="text" id="room-id" placeholder="Enter room ID or create new">
+            <button type="submit">Join Room</button>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+    <script>
+        document.getElementById('join-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            let roomId = document.getElementById('room-id').value;
+            
+            if (!roomId) {
+                roomId = uuid.v4();
+            }
+            
+            window.location.href = `/room/${roomId}?username=${encodeURIComponent(username)}`;
+        });
+       
+    </script>
+</body>
+</html>
